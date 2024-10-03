@@ -7,5 +7,5 @@ bash <(curl -s https://raw.githubusercontent.com/Jameshan-112/vps-a/refs/heads/m
 
 ### 一键安装运行ufw
 ```sh
-bash <(curl -s https://raw.githubusercontent.com/Jameshan-112/vps-a/refs/heads/main/install-fail2ban.sh)
+bash <(curl -s https://raw.githubusercontent.com/Jameshan-112/vps-a/refs/heads/main/install-ufw.sh)
 ```
