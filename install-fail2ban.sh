@@ -60,3 +60,5 @@ fi
 systemctl enable fail2ban
 
 echo "fail2ban 安装配置完成，配置文件在 /etc/fail2ban/jail.local 处修改。默认在300年内输入错误2次封禁该IP 600年。"
+
+fail2ban-client status sshd
