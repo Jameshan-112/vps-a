@@ -32,14 +32,14 @@ EOT
 # 尝试启动 fail2ban 服务
 systemctl start fail2ban 2>/dev/null
 
-# 检查启动是否报错
-if [[ $? -ne 0 ]]; then
-    echo "Adding 'backend = systemd' to /etc/fail2ban/jail.local due to systemctl error."
+# 检查 fail2ban 服务是否正在运行
+if ! systemctl is-active --quiet fail2ban; then
+    echo "Fail2ban is not running, adding 'backend = systemd' to /etc/fail2ban/jail.local."
     sed -i '/^\[DEFAULT\]/a backend = systemd' /etc/fail2ban/jail.local
     # 重新加载 fail2ban 配置并重启服务
     systemctl restart fail2ban
-    # 再次检查服务启动状态
-    if [[ $? -ne 0 ]]; then
+    # 检查重新启动的结果
+    if ! systemctl is-active --quiet fail2ban; then
         echo "Fail2ban failed to start even after adding 'backend = systemd'."
         exit 1
     fi
