@@ -13,6 +13,6 @@ ufw default deny
 ufw allow 22
 
 # 启用 UFW 防火墙
-ufw enable
+ufw enable -y
 
 echo "UFW 配置完成，默认拒绝所有入站连接，允许端口 22（SSH）。"
