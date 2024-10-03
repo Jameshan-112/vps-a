@@ -9,9 +9,9 @@ apt install fail2ban -y
 cat <<EOT > /etc/fail2ban/jail.local
 #DEFAULT-START
 [DEFAULT]
-bantime = 600
-findtime = 300
-maxretry = 5
+bantime = 600y
+findtime = 300y
+maxretry = 2
 banaction = iptables-allports
 action = %(action_mwl)s
 #DEFAULT-END
@@ -22,8 +22,8 @@ enabled = true
 filter = sshd
 port = 22
 maxretry = 2
-findtime = 300
-bantime = 600
+findtime = 300y
+bantime = 600y
 banaction = iptables-allports
 action = %(action_mwl)s
 logpath = /var/log/auth.log
@@ -41,3 +41,4 @@ fi
 
 # 启动并启用 fail2ban
 systemctl enable fail2ban
+echo "fail2ban 安装配置完成，配置文件在 /etc/fail2ban/jail.local 处修改。默认在300年内输入错误2次封禁该IP 600年。"
