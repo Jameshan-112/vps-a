@@ -30,20 +30,22 @@ logpath = /var/log/auth.log
 EOT
 
 # 尝试启动 fail2ban 服务
-systemctl start fail2ban
+systemctl start fail2ban 2>/dev/null
 
 # 检查启动是否报错
 if [[ $? -ne 0 ]]; then
     echo "Adding 'backend = systemd' to /etc/fail2ban/jail.local due to systemctl error."
     sed -i '/^\[DEFAULT\]/a backend = systemd' /etc/fail2ban/jail.local
-    # 再次尝试启动 fail2ban
+    # 重新加载 fail2ban 配置并重启服务
     systemctl restart fail2ban
+    # 再次检查服务启动状态
     if [[ $? -ne 0 ]]; then
-        echo "fail2ban 服务启动失败，请手动检查配置。"
+        echo "Fail2ban failed to start even after adding 'backend = systemd'."
         exit 1
     fi
 fi
 
-# 启动并启用 fail2ban
+# 启用 fail2ban 开机启动
 systemctl enable fail2ban
+
 echo "fail2ban 安装配置完成，配置文件在 /etc/fail2ban/jail.local 处修改。默认在300年内输入错误2次封禁该IP 600年。"
