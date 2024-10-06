@@ -31,7 +31,7 @@ EOT
 
 # 尝试启动 fail2ban 服务
 systemctl start fail2ban 2>/dev/null
-
+sleep 3
 # 检查 fail2ban 服务是否正在运行
 # 检查 Fail2ban 是否在运行
 if ! systemctl is-active --quiet fail2ban; then
