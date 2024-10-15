@@ -5,7 +5,7 @@ apt upgrade -y
 apt update
 # 安装 UFW 防火墙
 apt install -y ufw
-
+sleep 1
 # 默认拒绝所有传入连接
 ufw default deny
 sleep 1
